@@ -3,6 +3,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 const EventCard = ({
+  id,
   organizer, //
   game,
   description,
@@ -16,7 +17,7 @@ const EventCard = ({
       <Card.Text>{date}</Card.Text>
       <Card.Text>{time}</Card.Text>
       <Card.Text>Game: {game}</Card.Text>
-      <Card.Link href="#">Edit</Card.Link>
+      <Card.Link href={`/events/edit/${id}`}>Edit</Card.Link>
       <Card.Link href="#">Delete</Card.Link>
       <Card.Body>
         {/* {
@@ -30,6 +31,7 @@ const EventCard = ({
 );
 
 EventCard.propTypes = {
+  id: PropTypes.number.isRequired,
   organizer: PropTypes.number.isRequired,
   game: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
