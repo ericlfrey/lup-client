@@ -47,10 +47,23 @@ const getGameTypes = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteGame = (gameId) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/games/${gameId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    // .then((response) => response.json())
+    .then((data) => resolve((data)))
+    .catch(reject);
+});
+
 export {
   getGames,
   createGame,
   getGameTypes,
   getGameById,
   updateGame,
+  deleteGame,
 };
