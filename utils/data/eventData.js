@@ -39,7 +39,6 @@ const updateEvent = (event) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// eslint-disable-next-line import/prefer-default-export
 export {
   getEvents, createEvent, getEventById, updateEvent,
 };
