@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { getGames } from '../../utils/data/gameData';
-import { createEvent, getEventById } from '../../utils/data/eventData';
+import { createEvent, getEventById, updateEvent } from '../../utils/data/eventData';
 
 const initialState = {
   description: '',
@@ -47,16 +47,26 @@ const EventForm = ({ user }) => {
     // Prevent form from being submitted
     e.preventDefault();
 
-    const event = {
-      description: currentEvent.description,
-      date: currentEvent.date,
-      time: currentEvent.time,
-      gameId: Number(currentEvent.gameId),
-      organizer: user.uid,
-    };
-
-    // Send POST request to your API
-    createEvent(event).then(() => router.push('/events'));
+    if (currentEvent.id) {
+      const event = {
+        id: currentEvent.id,
+        description: currentEvent.description,
+        date: currentEvent.date,
+        time: currentEvent.time,
+        gameId: currentEvent.gameId,
+        organizer: user.uid,
+      };
+      updateEvent(event).then(() => router.push('/events'));
+    } else {
+      const event = {
+        description: currentEvent.description,
+        date: currentEvent.date,
+        time: currentEvent.time,
+        gameId: currentEvent.gameId,
+        organizer: user.uid,
+      };
+      createEvent(event).then(() => router.push('/events'));
+    }
   };
 
   return (
