@@ -26,3 +26,9 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.form {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}

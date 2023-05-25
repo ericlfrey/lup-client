@@ -5,7 +5,7 @@ const EditGame = () => {
   const { user } = useAuth();
   return (
     <div>
-      <h2>Register New Game</h2>
+      <h2>Edit Game</h2>
       <GameForm user={user} />
     </div>
   );
