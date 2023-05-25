@@ -15,16 +15,15 @@ const initialState = {
 
 const EventForm = ({ user }) => {
   const [games, setGames] = useState([]);
-  /*
-  Since the input fields are bound to the values of
-  the properties of this state variable, you need to
-  provide some default values.
-  */
   const [currentEvent, setCurrentEvent] = useState(initialState);
   const router = useRouter();
+  // const { id } = router.query;
 
   useEffect(() => {
     getGames().then(setGames);
+    // if (id) {
+
+    // }
   }, []);
 
   const handleChange = (e) => {
@@ -53,7 +52,7 @@ const EventForm = ({ user }) => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form className="form" onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Description</Form.Label>
           <Form.Control name="description" required value={setCurrentEvent.description} onChange={handleChange} />
