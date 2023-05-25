@@ -3,22 +3,26 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 const GameCard = ({
+  id,
   title, //
   maker,
   numberOfPlayers,
   skillLevel,
 }) => (
-  <Card className="text-center">
-    <Card.Header>{title}</Card.Header>
+  <Card style={{ width: '18rem', margin: '5px' }}>
     <Card.Body>
-      <Card.Title>By: {maker}</Card.Title>
-      <Card.Text>{numberOfPlayers} players needed</Card.Text>
+      <Card.Title>{title}</Card.Title>
+      <Card.Subtitle className="mb-2 text-muted">{maker}</Card.Subtitle>
+      <Card.Text>Number of Players: {numberOfPlayers}</Card.Text>
+      <Card.Text>Skill Level: {skillLevel}</Card.Text>
+      <Card.Link href={`/games/edit/${id}`}>Edit</Card.Link>
+      <Card.Link href="#">Delete</Card.Link>
     </Card.Body>
-    <Card.Footer className="text-muted">Skill Level: {skillLevel}</Card.Footer>
   </Card>
 );
 
 GameCard.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   maker: PropTypes.string.isRequired,
   numberOfPlayers: PropTypes.number.isRequired,
