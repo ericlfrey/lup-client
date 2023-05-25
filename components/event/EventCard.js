@@ -3,24 +3,35 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 const EventCard = ({
+  id,
   organizer, //
   game,
   description,
   date,
   time,
 }) => (
-  <Card className="text-center">
-    <Card.Header>{description}</Card.Header>
+  <Card style={{ width: '18rem', margin: '5px' }}>
     <Card.Body>
-      <Card.Title>Game: {game}</Card.Title>
-      <Card.Text>Organized By:{organizer}</Card.Text>
-      <Card.Text>Date:{date}</Card.Text>
-      <Card.Text>Time:{time}</Card.Text>
+      <Card.Title>{description}</Card.Title>
+      <Card.Text>By: {organizer}</Card.Text>
+      <Card.Text>{date}</Card.Text>
+      <Card.Text>{time}</Card.Text>
+      <Card.Text>Game: {game}</Card.Text>
+      <Card.Link href={`/events/edit/${id}`}>Edit</Card.Link>
+      <Card.Link href="#">Delete</Card.Link>
+      <Card.Body>
+        {/* {
+          event.joined ?
+            <Button className="btn-danger" onClick={leave}>Leave</Button>
+            : <Button className="btn-success" onClick={join}>Join</Button>
+        } */}
+      </Card.Body>
     </Card.Body>
   </Card>
 );
 
 EventCard.propTypes = {
+  id: PropTypes.number.isRequired,
   organizer: PropTypes.number.isRequired,
   game: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

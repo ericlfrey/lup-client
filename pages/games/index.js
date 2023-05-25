@@ -22,11 +22,13 @@ function Home() {
       >
         Register New Game
       </Button>
-      {games.map((game) => (
-        <section key={`game--${game.id}`} className="game">
-          <GameCard title={game.title} maker={game.maker} numberOfPlayers={game.number_of_players} skillLevel={game.skill_level} />
-        </section>
-      ))}
+      <div className="card-container">
+        {games.map((game) => (
+          <section key={`game--${game.id}`} className="game">
+            <GameCard id={game.id} title={game.title} maker={game.maker} numberOfPlayers={game.number_of_players} skillLevel={game.skill_level} />
+          </section>
+        ))}
+      </div>
     </article>
   );
 }

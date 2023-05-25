@@ -22,11 +22,14 @@ function Home() {
       >
         Register New Event
       </Button>
-      {events.map((event) => (
-        <section key={`event--${event.id}`} className="event">
-          <EventCard organizer={event.organizer.id} game={event.game?.title} description={event.description} date={event.date} time={event.time} />
-        </section>
-      ))}
+      <div className="card-container">
+
+        {events.map((event) => (
+          <section key={`event--${event.id}`} className="event">
+            <EventCard id={event.id} organizer={event.organizer.id} game={event.game?.title} description={event.description} date={event.date} time={event.time} />
+          </section>
+        ))}
+      </div>
     </article>
   );
 }
