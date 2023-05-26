@@ -53,7 +53,7 @@ EventCard.propTypes = {
   description: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
-  joined: PropTypes.bool.isRequired,
+  joined: PropTypes.number.isRequired,
   attendees: PropTypes.number.isRequired,
   getEvents: PropTypes.func.isRequired,
 };

@@ -3,13 +3,15 @@ import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import GameCard from '../../components/game/GameCard';
 import { getGames, getGameTypes, getGameByGameType } from '../../utils/data/gameData';
+import { useAuth } from '../../utils/context/authContext';
 
 function Home() {
   const [games, setGames] = useState([]);
   const [gameTypes, setGameTypes] = useState();
   const router = useRouter();
+  const { user } = useAuth();
 
-  const getAllGames = () => getGames().then((data) => setGames(data));
+  const getAllGames = () => getGames(user.uid).then((data) => setGames(data));
   const filterGamesByType = (gameTypeId) => getGameByGameType(gameTypeId).then(setGames);
 
   useEffect(() => {
