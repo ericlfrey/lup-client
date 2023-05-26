@@ -39,7 +39,7 @@ function Home() {
       <div className="card-container">
         {games.map((game) => (
           <section key={`game--${game.id}`} className="game">
-            <GameCard id={game.id} title={game.title} maker={game.maker} numberOfPlayers={game.number_of_players} skillLevel={game.skill_level} getCards={getAllGames} />
+            <GameCard id={game.id} title={game.title} maker={game.maker} numberOfPlayers={game.number_of_players} skillLevel={game.skill_level} eventCount={game.event_count} getCards={getAllGames} />
           </section>
         ))}
       </div>
