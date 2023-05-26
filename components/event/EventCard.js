@@ -12,6 +12,7 @@ const EventCard = ({
   date,
   time,
   joined,
+  attendees,
   getEvents,
 }) => {
   const { user } = useAuth();
@@ -30,6 +31,7 @@ const EventCard = ({
         <Card.Text>{date}</Card.Text>
         <Card.Text>{time}</Card.Text>
         <Card.Text>Game: {game}</Card.Text>
+        <Card.Text>Number of attendees: {attendees}</Card.Text>
         <Card.Link href={`/events/edit/${id}`}>Edit</Card.Link>
         <Card.Link href="#" onClick={handleDelete}>Delete</Card.Link>
         <Card.Body>
@@ -51,7 +53,8 @@ EventCard.propTypes = {
   description: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
-  joined: PropTypes.bool.isRequired,
+  joined: PropTypes.number.isRequired,
+  attendees: PropTypes.number.isRequired,
   getEvents: PropTypes.func.isRequired,
 };
 

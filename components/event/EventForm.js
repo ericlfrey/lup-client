@@ -20,7 +20,7 @@ const EventForm = ({ user }) => {
   const { id } = router.query;
 
   useEffect(() => {
-    getGames().then(setGames);
+    getGames(user.uid).then(setGames);
     if (id) {
       getEventById(id).then((eventObj) => {
         setCurrentEvent((prevState) => ({
@@ -62,7 +62,7 @@ const EventForm = ({ user }) => {
         description: currentEvent.description,
         date: currentEvent.date,
         time: currentEvent.time,
-        gameId: currentEvent.gameId,
+        game: currentEvent.gameId,
         organizer: user.uid,
       };
       createEvent(event, user.uid).then(() => router.push('/events'));

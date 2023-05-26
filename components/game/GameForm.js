@@ -66,9 +66,9 @@ const GameForm = ({ user }) => {
       const game = {
         maker: currentGame.maker,
         title: currentGame.title,
-        numberOfPlayers: Number(currentGame.numberOfPlayers),
-        skillLevel: Number(currentGame.skillLevel),
-        gameType: Number(currentGame.gameTypeId),
+        number_of_players: Number(currentGame.numberOfPlayers),
+        skill_level: Number(currentGame.skillLevel),
+        game_type: Number(currentGame.gameTypeId),
         userId: user.uid,
       };
       createGame(game, user.uid).then(() => router.push('/games'));

@@ -1,7 +1,13 @@
 import { clientCredentials } from '../client';
 
-const getGames = () => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/games`)
+const getGames = (uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/games`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
     .then((response) => response.json())
     .then(resolve)
     .catch(reject);
@@ -9,6 +15,13 @@ const getGames = () => new Promise((resolve, reject) => {
 
 const getGameById = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/games/${id}`)
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
+const getGameByGameType = (GameTypeId) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/games?type=${GameTypeId}`)
     .then((response) => response.json())
     .then(resolve)
     .catch(reject);
@@ -67,4 +80,5 @@ export {
   getGameById,
   updateGame,
   deleteGame,
+  getGameByGameType,
 };

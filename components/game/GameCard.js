@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 import { deleteGame } from '../../utils/data/gameData';
 
 const GameCard = ({
-  id, title, maker, numberOfPlayers, skillLevel, getCards,
+  id, title, maker, numberOfPlayers, skillLevel, getCards, eventCount,
 }) => {
   const handleDelete = () => {
     deleteGame(id).then(() => getCards());
@@ -17,6 +17,7 @@ const GameCard = ({
           <Card.Subtitle className="mb-2 text-muted">{maker}</Card.Subtitle>
           <Card.Text>Number of Players: {numberOfPlayers}</Card.Text>
           <Card.Text>Skill Level: {skillLevel}</Card.Text>
+          <Card.Text># of Events: {eventCount}</Card.Text>
           <Card.Link href={`/games/edit/${id}`}>Edit</Card.Link>
           <Card.Link href="#" onClick={handleDelete}>Delete</Card.Link>
         </Card.Body>
@@ -32,6 +33,7 @@ GameCard.propTypes = {
   numberOfPlayers: PropTypes.number.isRequired,
   skillLevel: PropTypes.number.isRequired,
   getCards: PropTypes.func.isRequired,
+  eventCount: PropTypes.number.isRequired,
 };
 
 export default GameCard;
