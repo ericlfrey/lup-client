@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import GameCard from '../../components/game/GameCard';
-import { getGames } from '../../utils/data/gameData';
+import { getGames, getGameTypes, getGameByGameType } from '../../utils/data/gameData';
 
 function Home() {
   const [games, setGames] = useState([]);
+  const [gameTypes, setGameTypes] = useState();
   const router = useRouter();
 
   const getAllGames = () => getGames().then((data) => setGames(data));
+  const filterGamesByType = (gameTypeId) => getGameByGameType(gameTypeId).then(setGames);
 
   useEffect(() => {
     getAllGames();
+    getGameTypes().then(setGameTypes);
   }, []);
 
   return (
@@ -25,10 +28,11 @@ function Home() {
         >
           Register New Game
         </Button>
-        <DropdownButton id="dropdown-basic-button" title="Dropdown button" className="game-filter-btn">
-          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <DropdownButton id="dropdown-basic-button" title="Filter by Game Type" className="game-filter-btn">
+          <Dropdown.Item href="#" onClick={getAllGames}>All Games</Dropdown.Item>
+          {gameTypes?.map((gameType) => (
+            <Dropdown.Item key={gameType.id} href="#" onClick={() => filterGamesByType(gameType.id)}>{gameType.label}</Dropdown.Item>
+          ))}
         </DropdownButton>
 
       </div>

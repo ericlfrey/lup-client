@@ -14,6 +14,13 @@ const getGameById = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getGameByGameType = (GameTypeId) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/games?type=${GameTypeId}`)
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
 const createGame = (game, uid) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/games`, {
     method: 'POST',
@@ -67,4 +74,5 @@ export {
   getGameById,
   updateGame,
   deleteGame,
+  getGameByGameType,
 };
