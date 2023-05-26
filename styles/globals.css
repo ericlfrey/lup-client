@@ -37,3 +37,11 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+.event-btns {
+  display: flex;
+}
+
+.game-filter-btn {
+  margin-left: 50px;
+}
