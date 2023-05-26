@@ -65,7 +65,7 @@ const EventForm = ({ user }) => {
         gameId: currentEvent.gameId,
         organizer: user.uid,
       };
-      createEvent(event).then(() => router.push('/events'));
+      createEvent(event, user.uid).then(() => router.push('/events'));
     }
   };
 

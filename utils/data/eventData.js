@@ -1,7 +1,13 @@
 import { clientCredentials } from '../client';
 
-const getEvents = () => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/events`)
+const getEvents = (uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/events`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
     .then((response) => response.json())
     .then(resolve)
     .catch(reject);
@@ -14,11 +20,12 @@ const getEventById = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createEvent = (event) => new Promise((resolve, reject) => {
+const createEvent = (event, uid) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/events`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `${uid}`,
     },
     body: JSON.stringify(event),
   })
@@ -51,6 +58,27 @@ const deleteEvent = (eventId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const leaveEvent = (eventId, uid) => fetch(`http://localhost:8000/events/${eventId}/leave`, {
+  method: 'DELETE',
+  headers: {
+    Authorization: `${uid}`,
+  },
+});
+
+const joinEvent = (eventId, uid) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:8000/events/${eventId}/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
-  getEvents, createEvent, getEventById, updateEvent, deleteEvent,
+  getEvents, createEvent, getEventById, updateEvent, deleteEvent, leaveEvent,
+  joinEvent,
 };
