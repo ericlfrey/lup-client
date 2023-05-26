@@ -71,7 +71,7 @@ const GameForm = ({ user }) => {
         gameType: Number(currentGame.gameTypeId),
         userId: user.uid,
       };
-      createGame(game).then(() => router.push('/games'));
+      createGame(game, user.uid).then(() => router.push('/games'));
     }
   };
 

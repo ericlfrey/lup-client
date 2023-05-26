@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Card } from 'react-bootstrap';
-import { deleteEvent } from '../../utils/data/eventData';
+import { Button, Card } from 'react-bootstrap';
+import { deleteEvent, joinEvent, leaveEvent } from '../../utils/data/eventData';
+import { useAuth } from '../../utils/context/authContext';
 
 const EventCard = ({
   id,
@@ -10,8 +11,13 @@ const EventCard = ({
   description,
   date,
   time,
+  joined,
   getEvents,
 }) => {
+  const { user } = useAuth();
+
+  const leave = () => leaveEvent(id, user.uid).then(() => getEvents());
+  const join = () => joinEvent(id, user.uid).then(() => getEvents());
   const handleDelete = () => {
     deleteEvent(id).then(() => getEvents());
   };
@@ -27,11 +33,11 @@ const EventCard = ({
         <Card.Link href={`/events/edit/${id}`}>Edit</Card.Link>
         <Card.Link href="#" onClick={handleDelete}>Delete</Card.Link>
         <Card.Body>
-          {/* {
-            event.joined ?
-              <Button className="btn-danger" onClick={leave}>Leave</Button>
+          {
+            joined
+              ? <Button className="btn-danger" onClick={leave}>Leave</Button>
               : <Button className="btn-success" onClick={join}>Join</Button>
-          } */}
+          }
         </Card.Body>
       </Card.Body>
     </Card>
@@ -45,6 +51,7 @@ EventCard.propTypes = {
   description: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
+  joined: PropTypes.bool.isRequired,
   getEvents: PropTypes.func.isRequired,
 };
 
